@@ -75,17 +75,9 @@ def adjust_results4_isadog(results_dic, dogfile):
             if line not in dognames_dic:
                 dognames_dic[line] = 1
             line = infile.readline()
-
-    # Add to whether pet labels & classifier labels are dogs by appending
-    # two items to end of value(List) in results_dic. 
-    # List Index 3 = whether(1) or not(0) Pet Image Label is a dog AND 
-    # List Index 4 = whether(1) or not(0) Classifier Label is a dog
-    # How - iterate through results_dic if labels are found in dognames_dic
-    # then label "is a dog" index3/4=1 otherwise index3/4=0 "not a dog"
     for key in results_dic:
         if results_dic[key][0] in dognames_dic:
             
-            # Classifier Label IS image of Dog (e.g. found in dognames_dic)
             # appends (1, 1) because both labels are dogs
             if results_dic[key][1] in dognames_dic:
                 results_dic[key].extend((1, 1))
@@ -94,8 +86,6 @@ def adjust_results4_isadog(results_dic, dogfile):
             #     variable key. This indicates the pet label is-a-dog, classifier label is-NOT-a-dog.
             else:
                 results_dic[key].extend((1, 0))
-
-        # Pet Image Label IS NOT a Dog image (e.g. NOT found in dognames_dic)
         else:
             # 4d. Add (0,1) to the results_dic dictionary for the key indicated by the 
             #     variable key. This indicates the pet label is-NOT-a-dog, classifier label is-a-dog.
